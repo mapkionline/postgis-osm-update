@@ -1,0 +1,4 @@
+imposm/*
+postgres/data/*
+*.env
+db_password

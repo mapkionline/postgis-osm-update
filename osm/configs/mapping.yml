@@ -1,0 +1,413 @@
+areas:
+  area_tags: [building, landuse, leisure, natural, aeroway]
+  linear_tags: [highway, barrier]
+tags:
+  load_all: true
+tables:
+  landcover:
+    type: polygon
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - key: name
+        name: name
+        type: string
+      - name: type
+        type: mapping_value
+      - name: area
+        type: webmerc_area
+      - name: tags
+        type: hstore_tags
+      - name: z_order
+        type: enumerate
+        args:
+          values:
+            - aerodrome
+            - bare_rock
+            - scree
+            - land
+            - island
+            - heath
+            - railway
+            - industrial
+            - commercial
+            - retail
+            - residential
+            - quarry
+            - zoo
+            - vineyard
+            - orchard
+            - scrub
+            - hospital
+            - place_of_worship
+            - theatre
+            - cinema
+            - nature_reserve
+            - parking
+            - fuel
+            - baracks
+            - library
+            - college
+            - school
+            - university
+            - golf_course
+            - allotments
+            - common
+            - pitch
+            - sports_centre
+            - garden
+            - recreation_ground
+            - village_green
+            - wetland
+            - grass
+            - grassland
+            - meadow
+            - wood
+            - farmland
+            - farm
+            - farmyard
+            - cemetery
+            - grave_yard
+            - forest
+            - park
+            - playground
+            - footway
+            - pedestrian
+            - camp_site
+    mapping:
+      aeroway:
+        - aerodrome
+        - runway
+        - taxiway
+      amenity:
+        - university
+        - school
+        - college
+        - library
+        - fuel
+        - parking
+        - cinema
+        - theatre
+        - place_of_worship
+        - hospital
+        - grave_yard
+      barrier:
+        - hedge
+      highway:
+        - pedestrian
+        - footway
+      landuse:
+        - park
+        - forest
+        - residential
+        - retail
+        - commercial
+        - industrial
+        - railway
+        - cemetery
+        - grass
+        - farmyard
+        - farm
+        - farmland
+        - orchard
+        - vineyard
+        - wood
+        - meadow
+        - village_green
+        - recreation_ground
+        - allotments
+        - quarry
+      leisure:
+        - park
+        - garden
+        - playground
+        - golf_course
+        - sports_centre
+        - pitch
+        - stadium
+        - common
+        - nature_reserve
+      man_made:
+        - pier
+      military:
+        - barracks
+      natural:
+        - wood
+        - land
+        - scrub
+        - wetland
+        - heath
+        - bare_rock
+        - scree
+        - grassland
+      place:
+        - island
+      tourism:
+        - zoo
+        - camp_site
+  buildings:
+    type: polygon
+    mapping:
+      building: [__any__]
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        type: string
+        key: name
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+  barriers:
+    type: linestring
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        key: name
+        type: string
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+    mapping:
+      barrier:
+        - city_wall
+        - hedge
+        - retaining_wall
+        - wall
+        - bollard
+        - gate
+        - spikes
+        - lift_gate
+        - kissing_gate
+        - embankment
+        - 'yes'
+        - wire_fence
+      natural:
+        - cliff
+        - ridge
+  roads:
+    type: linestring
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: type
+        type: mapping_value
+      - name: name
+        key: name
+        type: string
+      - name: tunnel
+        key: tunnel
+        type: boolint
+      - name: bridge
+        key: bridge
+        type: boolint
+      - name: oneway
+        key: oneway
+        type: direction
+      - name: ref
+        key: ref
+        type: string
+      - name: z_order
+        key: layer
+        type: wayzorder
+      - name: access
+        key: access
+        type: string
+      - name: surface
+        key: surface
+        type: string
+      - name: service
+        key: service
+        type: string
+      - name: class
+        type: mapping_key
+      - name: tags
+        type: hstore_tags
+    filters:
+      reject:
+        area: ["yes"]
+    mappings:
+      railway:
+        mapping:
+          railway:
+          - rail
+          - tram
+          - light_rail
+          - subway
+          - narrow_gauge
+          - preserved
+          - funicular
+          - monorail
+          - disused
+      roads:
+        mapping:
+          highway:
+            - motorway
+            - motorway_link
+            - trunk
+            - trunk_link
+            - primary
+            - primary_link
+            - secondary
+            - secondary_link
+            - tertiary
+            - tertiary_link
+            - road
+            - path
+            - track
+            - service
+            - footway
+            - bridleway
+            - cycleway
+            - steps
+            - pedestrian
+            - living_street
+            - unclassified
+            - residential
+            - raceway
+          man_made:
+            - pier
+            - groyne
+  waterways:
+    type: linestring
+    mapping:
+      barrier:
+        - ditch
+      waterway:
+        - stream
+        - river
+        - canal
+        - drain
+        - ditch
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        type: string
+        key: name
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+  waterareas:
+    type: polygon
+    mapping:
+      amenity:
+        - swimming_pool
+      landuse:
+        - basin
+        - reservoir
+      leisure:
+        - swimming_pool
+      natural:
+        - water
+      waterway:
+      - riverbank
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        type: string
+        key: name
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+  route_relation_members:
+    type: relation_member
+    columns:
+      - name: osm_id
+        type: id
+      - name: member
+        type: member_id
+      - name: index
+        type: member_index
+      - name: role
+        type: member_role
+      - name: type
+        type: member_type
+      - name: geometry
+        type: geometry
+      - name: relname
+        key: name
+        type: string
+      - name: name
+        key: name
+        type: string
+        from_member: true
+      - name: route
+        key: route
+        type: string
+      - name: symbol
+        key: "osmc:symbol"
+        type: string
+      - name: symbol2
+        key: symbol
+        type: string
+      - name: color
+        key: colour
+        type: string
+      - name: operator
+        key: operator
+        type: string
+      - key: ref
+        name: ref
+        type: string
+    relation_types: [route]
+    mapping:
+      route: [__any__]
+  topo_points:
+    type: point
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        type: string
+        key: name
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+    mapping:
+      natural:
+        - tree
+        - spring
+        - peak
+        - saddle
+        - cave_entrance
+        - stone
+        - rock
+  places:
+    type: point
+    columns:
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: name
+        type: string
+        key: name
+      - name: type
+        type: mapping_value
+      - name: tags
+        type: hstore_tags
+    mapping:
+     place: [__any__]
+
