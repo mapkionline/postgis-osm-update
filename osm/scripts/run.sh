@@ -4,7 +4,7 @@ CFG_DIR="/etc/osm-update"
 DATA_DIR="/var/lib/imposm"
 
 # Create database connection string
-if [ -z $OSM_DB_PASS_FILE ] ; then
+if [ ! -f $OSM_DB_PASS_FILE ] ; then
 	CONN="postgis://${OSM_DB_USER}:${OSM_DB_PASS}@${OSM_DB_HOST}:${OSM_DB_PORT}/${OSM_DB_NAME}"
 else
 	PASS=$(cat "${OSM_DB_PASS_FILE}")
